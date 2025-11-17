@@ -5,10 +5,21 @@ const cells = [];
 let gamesPlayed = 0;
 const scores = [];
 
+const game = document.querySelector(".game");
+const displayScreen = document.querySelector(".display-screen");
+
 const playButton = document.getElementById("play-button");
 playButton.addEventListener("click", playGame);
 
-function playGame() {}
+function playGame() {
+  displayScreen.style.display = "none";
+  game.style.display = "flex";
+}
+
+function displayScreen() {
+  displayScreen.style.display = "flex";
+  game.style.display = "none";
+}
 
 // Giving users more time to count if there's more circles
 function setGameTimeout(circleCount) {
