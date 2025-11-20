@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="scripts/style.css">
-  <script src="scripts/game.js" defer></script>
+  <script src="scripts/index.js" defer></script>
   <title>Count the Circles!</title>
 </head>
 
@@ -13,10 +13,10 @@
 
   <h1>Count the Circles!</h1>
 
-  <div id="play-button">
-    <button>Play the Game!</button>
+  <div id="play-button-box">
+    <button id="play-button">Play the Game!</button>
   </div>
-  <div class="score">
+  <div class="scores">
     <div class="score-cell play-count">
       <div class="score-heading">Games Played:</div>
       <div class="score">0</div>
@@ -26,7 +26,7 @@
       <div class="score-heading">Score Last Game:</div>
       <div class="score"></div>
     </div>
-    <div class="score-cell average-score">
+    <div class="score-cell total-score">
       <div class="score-heading">Total Score:</div>
       <div class="score"></div>
     </div>
@@ -35,14 +35,22 @@
       <div class="score-heading">Circles Count Rate:</div>
       <div class="score"></div>
     </div>
-    <div class="score-cell average-success-rate">
-      <div class="score-heading">Average Success Rate:</div>
+    <div class="score-cell total-success-rate">
+      <div class="score-heading">Total Success Rate:</div>
       <div class="score"></div>
     </div>
-
   </div>
 
-  <div class="display-screen"></div>
+  <div class="display-screen">
+    <div class="title"></div>
+    <div class="message"></div>
+    <div class="user-input-box">
+      <form>
+        <input type="number" name="user-input" id="user-input" min="0" max="0" placeholder="0">
+        <input type="button" value="Submit Your Guess ⭕">
+      </form>
+    </div>
+  </div>
 
   <div class="game">
     <div class="row-0">
