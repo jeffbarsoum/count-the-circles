@@ -77,6 +77,84 @@ h6 {
 /* Fonts */
 
 /* Variables */
+:root {
+  --default-animation: "fadeIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1";
+  --default-animation-reverse: "fadeIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1 reverse";
+  --score-animation: "fadeScoreIn 1.5s 3.25s forwards";
+}
+
+/* Colors */
+/* https://perceptualpalettes.alexdunn.au/?c=Brand%2397ead2%2CSecondary%234b2142%2CTertiary%2374226c%2CNeutral%23816e94&l=90%2C80%2C70%2C60%2C35%2C21%2C12%2C6%2C2%2C1%2C0.5&n=false&i=true */
+:root {
+  --brand-050: #e1f9f2;
+  --brand-100: #bef2e3;
+  --brand-200: #97ead2;
+  --brand-300: #8ddac4;
+  --brand-400: #6fab9a;
+  --brand-500: #58887a;
+  --brand-600: #43685e;
+  --brand-700: #304b43;
+  --brand-800: #1b2a25;
+  --brand-900: #121b19;
+  --brand-950: #0b110f;
+  --secondary-050: #f5f3f5;
+  --secondary-100: #ebe6ea;
+  --secondary-200: #dfd8de;
+  --secondary-300: #d3c9d1;
+  --secondary-400: #ad9aa9;
+  --secondary-500: #91778b;
+  --secondary-600: #775770;
+  --secondary-700: #5e3956;
+  --secondary-800: #3c1b35;
+  --secondary-900: #281223;
+  --secondary-950: #190b16;
+  --tertiary-050: #f7f2f6;
+  --tertiary-100: #eee4ed;
+  --tertiary-200: #e5d5e3;
+  --tertiary-300: #dbc5d9;
+  --tertiary-400: #bb93b7;
+  --tertiary-500: #a36c9d;
+  --tertiary-600: #8c4886;
+  --tertiary-700: #74236c;
+  --tertiary-800: #42133e;
+  --tertiary-900: #2d0d29;
+  --tertiary-950: #1c081a;
+  --neutral-050: #f4f3f6;
+  --neutral-100: #e9e6ed;
+  --neutral-200: #ddd8e2;
+  --neutral-300: #d0c9d7;
+  --neutral-400: #a89bb5;
+  --neutral-500: #89779b;
+  --neutral-600: #6b5b7a;
+  --neutral-700: #4c4157;
+  --neutral-800: #2b2431;
+  --neutral-900: #1c1820;
+  --neutral-950: #110f14;
+}
+
+:root {
+  --color-background-brand: var(--brand-200);
+  --color-text-brand: var(--brand-700);
+  --color-background-secondary: var(--secondary-200);
+  --color-text-secondary: var(--secondary-700);
+  --color-background-tertiary: var(--tertiary-200);
+  --color-text-tertiary: var(--tertiary-700);
+  --color-background-neutral: var(--neutral-200);
+  --color-text-neutral: var(--neutral-700);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background-brand: var(--brand-700);
+    --color-text-brand: var(--brand-300);
+    --color-background-secondary: var(--secondary-700);
+    --color-text-secondary: var(--secondary-300);
+    --color-background-tertiary: var(--tertiary-700);
+    --color-text-tertiary: var(--tertiary-300);
+    --color-background-neutral: var(--neutral-700);
+    --color-text-neutral: var(--neutral-300);
+  }
+}
 
 /* Page */
 
@@ -107,6 +185,12 @@ body {
   text-align: center;
 }
 
+.border-vertical {
+  background-color: blue;
+  min-width: 5px;
+  margin: 10px 5px 10px;
+}
+
 .game {
   display: none;
   flex-direction: column;
@@ -115,12 +199,49 @@ body {
 
 .display-screen {
   display: flex;
+  flex-direction: column;
   flex: 3;
   background-color: red;
 }
 
-.game [class^="row"] {
+.display-screen .title {
+  opacity: 0;
+}
+
+.display-screen .message {
+  opacity: 0;
+}
+
+.user-input-box {
+  opacity: 0;
+}
+
+.show {
   display: flex;
+  animation: fadeIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.hide {
+  display: none;
+  animation: fadeIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1 reverse;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  to {
+    opacity: 100%;
+    transform: translateY(0);
+  }
+}
+
+.game [class^="row"] {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: 1fr;
+  /* gap: 0.05fr; */
   flex: 1;
 }
 
@@ -198,5 +319,38 @@ body {
   }
   100% {
     transform: scale(0.8);
+  }
+}
+
+/* Score Animations */
+/* https://codepen.io/keenanpayne/pen/mxjGmo */
+@keyframes rotateTextUp {
+  0% {
+    transform: translate3d(0, 80px, 0);
+    opacity: 0;
+  }
+
+  20%,
+  80% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(0, -40px, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeScoreIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 80px, 0);
+  }
+
+  50%,
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
